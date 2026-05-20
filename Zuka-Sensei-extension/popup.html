@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <style>
-      body { width: 300px; padding: 15px; font-family: sans-serif; text-align: center;}
-      button { padding: 10px 15px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; font-weight: bold; }
-      button:hover { background: #0056b3; }
-      #result { margin-top: 15px; font-size: 14px; color: #333; text-align: left; }
-    </style>
-  </head>
-  <body>
-    <h3>Zuka Sensei</h3>
-    <button id="captureBtn">Analyze Screen</button>
-    <div id="result">Waiting for input...</div>
+        body { width: 350px; padding: 0; font-family: sans-serif; margin: 0; background-color: #f4f7f6; }
+        .header { background: #2c3e50; color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 16px; }
+        .chat-container { height: 320px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 12px; }
+
+        /* The Chat Bubble Architecture */
+        .message { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
+        .user-msg { background: #3498db; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .ai-msg { background: #e0e0e0; color: #333; align-self: flex-start; border-bottom-left-radius: 2px; }
+
+        /* The Input Dock */
+        .input-area { display: flex; padding: 12px; background: white; border-top: 1px solid #ddd; }
+        input[type="text"] { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-right: 8px; outline: none; }
+        input[type="text"]:focus { border-color: #3498db; }
+        button { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #219150; }</style>
+</head>
+<body>
+    <div class="header">Zuka Sensei</div>
+
+    <div class="chat-container" id="chatLog">
+        <div class="message ai-msg">System online. What would you like me to analyze on your screen?</div>
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="promptInput" placeholder="Ask a question..." autocomplete="off" />
+        <button id="captureBtn">Ask</button>
+    </div>
 
     <script src="popup.js"></script>
-  </body>
+</body>
 </html>

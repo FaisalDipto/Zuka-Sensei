@@ -1,0 +1,153 @@
+/* The Floating Trigger Button */
+#zuka-trigger-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #2c3e50;
+    color: white;
+    border-radius: 50%;
+    border: 3px solid #3498db;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999999; /* Ensure it is always on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+#zuka-trigger-btn:hover {
+    transform: scale(1.1);
+    background-color: #34495e;
+}
+
+/* The Invisible Glass Pane */
+#zuka-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 9999998; /* Just below the floating button */
+    cursor: crosshair;
+    display: none; /* Hidden until the user clicks the button */
+}
+
+/* The Blue Selection Box */
+#zuka-selection {
+    position: fixed;
+    border: 2px dashed #3498db;
+    background: rgba(52, 152, 219, 0.2); /* Semi-transparent blue */
+    z-index: 9999999;
+    display: none;
+    pointer-events: none; /* Crucial: Allows the mouse to click THROUGH the box onto the glass pane */
+}
+
+/* --- THE ZUKA SIDE PANEL --- */
+#zuka-panel {
+    position: fixed;
+    top: 20px;
+    right: -400px; /* Hidden off-screen to the right */
+    width: 350px;
+    max-height: 85vh;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    z-index: 9999999;
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: right 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth slide animation */
+}
+
+/* When we add this class via JS, it slides into view */
+#zuka-panel.open {
+    right: 20px;
+}
+
+#zuka-header {
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+#zuka-close {
+    cursor: pointer;
+    color: #bdc3c7;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+#zuka-close:hover {
+    color: white;
+}
+
+/* --- THE CHAT LOG --- */
+#zuka-chat-log {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f8f9fa;
+    height: 400px;
+}
+
+/* The Bubble Architecture */
+.zuka-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.zuka-user { background: #3498db; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+.zuka-ai { background: #e9ecef; color: #333; align-self: flex-start; border-bottom-left-radius: 2px; }
+.zuka-system { background: transparent; color: #7f8c8d; align-self: center; font-size: 12px; font-style: italic; }
+
+/* --- THE INPUT DOCK --- */
+#zuka-input-dock {
+    display: flex;
+    padding: 12px;
+    background: white;
+    border-top: 1px solid #ddd;
+}
+
+#zuka-input-dock input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+}
+
+#zuka-input-dock input:focus { border-color: #3498db; }
+
+#zuka-input-dock button {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+#zuka-input-dock button:hover { background: #219150; }
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
